@@ -21,8 +21,7 @@ public class Savings extends Account{
         int datediff = seconddate - firstdate;
         rate = .90/365;
         double ratetime = Math.pow(1+rate, datediff);
-                
-        
+                     
         if(secondyear - firstyear > 0) //allows for different years to be input
         {
             int yeardiff = secondyear - firstyear;
