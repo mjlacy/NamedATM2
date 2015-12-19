@@ -77,8 +77,8 @@ public class NamedATM
            {
                if(name.equalsIgnoreCase(myAccounts[0].getName()))
                {
-                  System.out.println("\nThat name has already been used\n");
-                  greeting();                
+                   System.out.println("\nThat name has already been used\n");
+                   greeting();                
                }
                else
                {
@@ -95,13 +95,13 @@ public class NamedATM
                    }   
                    else if(type.equalsIgnoreCase("savings"))
                    {
-                        myAccounts[index] = new Savings(100, index, name, PIN);
-                        System.out.println("\nBalances start at $100, and the annual interest rate is 90%");
+                       myAccounts[index] = new Savings(100, index, name, PIN);
+                       System.out.println("\nBalances start at $100, and the annual interest rate is 90%");
 
                    }
                    else
                    {
-                       System.out.println("\nInvalid Account Type");
+                       System.out.println("\nInvalid account type");
                        populateAcct();
                    }
                }   
@@ -132,7 +132,7 @@ public class NamedATM
                    }
                    else
                    {
-                       System.out.println("\nInvalid Account Type");
+                       System.out.println("\nInvalid account type");
                        populateAcct();
                    }
                }
@@ -155,7 +155,7 @@ public class NamedATM
                }
                else
                {
-                   System.out.println("\nInvalid Account Type");
+                   System.out.println("\nInvalid account type");
                    populateAcct();
                }
            }
@@ -179,18 +179,13 @@ public class NamedATM
            name = sc.nextLine();
            System.out.println("\nEnter your PIN");
            PIN = sc.nextLine();
-           if(name.equalsIgnoreCase(myAccounts[0].getName()) && PIN.equalsIgnoreCase(myAccounts[0].getPIN()))
+           for(int i = 0; i<myAccounts.length; i++)
            {
-                 num=0;
-           }
-           else if(name.equalsIgnoreCase(myAccounts[1].getName()) && PIN.equalsIgnoreCase(myAccounts[1].getPIN()))
-           {
-                 num=1;
+               if(myAccounts[i] != null && name.equalsIgnoreCase(myAccounts[i].getName()) && PIN.equalsIgnoreCase(myAccounts[i].getPIN()))
+               {
+                 num = i;
+               }
            }  
-           else if(name.equalsIgnoreCase(myAccounts[2].getName()) && PIN.equalsIgnoreCase(myAccounts[2].getPIN()))
-           {
-               num=2;
-           }   
            System.out.println();
            myAccounts[num].Menu();
         }
