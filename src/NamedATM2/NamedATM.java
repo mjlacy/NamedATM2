@@ -12,7 +12,8 @@ import java.util.*;
  */
 public class NamedATM 
 {
-    private Account[] myAccounts = new Account[3];    
+    int numberOfAccounts = 3;
+    private Account[] myAccounts = new Account[numberOfAccounts];    
     public static void main(String[] args) throws Exception
     {
         NamedATM A = new NamedATM();
@@ -69,104 +70,48 @@ public class NamedATM
                break;
             }
         }
-        if(index==0 || index==1 || index==2)
+        if(index !=-99)
         {
            System.out.println("\nPlease enter a name to be associated with the type of account you want");
            String name = sc.nextLine();
-           if(index==1)
+           for(int i = 0; i<myAccounts.length;i++)
            {
-               if(name.equalsIgnoreCase(myAccounts[0].getName()))
-               {
-                   System.out.println("\nThat name has already been used\n");
-                   greeting();                
-               }
-               else
-               {
-                   System.out.println("\nPlease enter a PIN to use with this account");
-                   String PIN = sc.nextLine();
-                   System.out.println("\nWhat type of account would you like to open, checking or savings?");
-                   String type = sc.next();
-
-                   if(type.equalsIgnoreCase("checking"))
-                   {
-                       myAccounts[index] = new Checking(100, index, name, PIN);
-                       System.out.println("\nBalances start at $100, and the annual interest rate is 5%");
-
-                   }   
-                   else if(type.equalsIgnoreCase("savings"))
-                   {
-                       myAccounts[index] = new Savings(100, index, name, PIN);
-                       System.out.println("\nBalances start at $100, and the annual interest rate is 90%");
-
-                   }
-                   else
-                   {
-                       System.out.println("\nInvalid account type");
-                       populateAcct();
-                   }
-               }   
-           }
-           else if(index==2)
-           {
-               if(name.equalsIgnoreCase(myAccounts[0].getName()) || name.equalsIgnoreCase(myAccounts[1].getName()))
+               if(myAccounts[i] != null && name.equalsIgnoreCase(myAccounts[i].getName()))
                {
                    System.out.println("\nThat name has already been used\n");
                    greeting();
+                   return;                
                }
-               else
-               {    
-                   System.out.println("\nPlease enter a PIN to use with this account");
-                   String PIN = sc.nextLine();
-                   System.out.println("\nWhat type of account would you like to open, checking or savings?");
-                   String type = sc.next();
+           }                  
+           System.out.println("\nPlease enter a PIN to use with this account");
+           String PIN = sc.nextLine();
+           System.out.println("\nWhat type of account would you like to open, checking or savings?");
+           String type = sc.next();
 
-                   if(type.equalsIgnoreCase("checking"))
-                   {
-                       myAccounts[index] = new Checking(100, index, name, PIN);
-                       System.out.println("\nBalances start at $100, and the annual interest rate is 5%");
-                   }
-                   else if(type.equalsIgnoreCase("savings"))
-                   {
-                       myAccounts[index] = new Savings(100, index, name, PIN);
-                       System.out.println("\nBalances start at $100, and the annual interest rate is 90%");
-                   }
-                   else
-                   {
-                       System.out.println("\nInvalid account type");
-                       populateAcct();
-                   }
-               }
+           if(type.equalsIgnoreCase("checking"))
+           {
+               myAccounts[index] = new Checking(100, index, name, PIN);
+               System.out.println("\nBalances start at $100, and the annual interest rate is 5%");
+
+           }   
+           else if(type.equalsIgnoreCase("savings"))
+           {
+               myAccounts[index] = new Savings(100, index, name, PIN);
+               System.out.println("\nBalances start at $100, and the annual interest rate is 90%");
+
            }
            else
-           {    
-               System.out.println("\nPlease enter a PIN to use with this account");
-               String PIN = sc.nextLine();
-               System.out.println("\nWhat type of account would you like to open, checking or savings?");
-               String type = sc.next();
-               if(type.equalsIgnoreCase("checking"))
-               {
-                   myAccounts[index] = new Checking(100, index, name, PIN);
-                   System.out.println("\nBalances start at $100, and the annual interest rate is 5%");
-               }
-               else if(type.equalsIgnoreCase("savings"))
-               {
-                   myAccounts[index] = new Savings(100, index, name, PIN);
-                   System.out.println("\nBalances start at $100, and the annual interest rate is 90%");
-               }
-               else
-               {
-                   System.out.println("\nInvalid account type");
-                   populateAcct();
-               }
+           {
+               System.out.println("\nInvalid account type");
+               populateAcct();
            }
-        }
+        }         
         else
         {
             System.out.println("\nSorry, all availible accounts are full\n");
             greeting();
         }    
-    }    
-        
+    }            
     void selectAcct()
     {
         Scanner sc = new Scanner(System.in);
@@ -204,7 +149,7 @@ public class NamedATM
         }
         catch(IOException | ClassNotFoundException e) 
         {
-            myAccounts = new Account[3]; 
+            myAccounts = new Account[numberOfAccounts]; 
         }
     }
     
