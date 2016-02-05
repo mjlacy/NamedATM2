@@ -16,6 +16,7 @@ public class Checking extends Account{
         super(bal, num, name, PIN);
     }
     
+    @Override
     protected void getInterest()
     {
         int datediff = seconddate - firstdate;
