@@ -69,45 +69,18 @@ abstract class Account implements Serializable{
 
             if(input==1)
             {
-                if(firstdateflag == false)
-                {    
-                    getDate1();    
-                    Deposit();
-                }
-                else if(firstdateflag == true)
-                {
-                    getDate2();
-                    getInterest();
-                    Deposit();
-                }
+                getDate();
+                Deposit();
             }
             else if (input==2)
-            {
-            if(firstdateflag == false)
             {    
-                    getDate1();    
-                    Withdraw();
-                }
-                else if(firstdateflag == true)
-                {
-                    getDate2();
-                    getInterest();
-                    Withdraw();
-                }
-            }
+                getDate();
+                Withdraw();
+            }                
             else if (input==3)
             {
-            if(firstdateflag == false)
-                {    
-                    getDate1();    
-                    CheckBalance();
-                }
-                else if(firstdateflag == true)
-                {
-                    getDate2();
-                    getInterest();
-                    CheckBalance();
-                }
+                getDate();
+                CheckBalance();
             }
             else if (input==4)
             {
@@ -171,7 +144,7 @@ abstract class Account implements Serializable{
         System.out.println("\nYour balance is: " + NumberFormat.getCurrencyInstance(new Locale("en", "US")).format(balance));
     }
     
-    protected void getDate1()
+    protected void getDate()
     {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter today's date in the format: mm/dd/yyyy");
@@ -179,33 +152,29 @@ abstract class Account implements Serializable{
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         ParsePosition pos = new ParsePosition(0);
         Date date = formatter.parse(input, pos);
-        
-        date1.setTime(date);
-        
-        firstdate = date1.get(Calendar.DAY_OF_YEAR);
-        firstyear = date1.get(Calendar.YEAR);
-        
-        firstdateflag = true;
-    }
-    
-    protected void getDate2()
-    {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Please enter today's date in the format: mm/dd/yyyy");
-        String input = sc.next();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        ParsePosition pos = new ParsePosition(0);
-        Date date = formatter.parse(input, pos);
-        
-        date2.setTime(date);
-        
-        seconddate = date2.get(Calendar.DAY_OF_YEAR);
-        secondyear = date2.get(Calendar.YEAR);
-        
-        if(firstyear > secondyear || firstyear == secondyear && firstdate > seconddate)
-        {
-            System.out.println("\nYou must enter a later date than the previous date used\n");
-            getDate2();
+            
+        if(firstdateflag == false)
+        {        
+            date1.setTime(date);
+
+            firstdate = date1.get(Calendar.DAY_OF_YEAR);
+            firstyear = date1.get(Calendar.YEAR);
+
+            firstdateflag = true;
+        }
+        else
+        {            
+            date2.setTime(date);
+
+            seconddate = date2.get(Calendar.DAY_OF_YEAR);
+            secondyear = date2.get(Calendar.YEAR);
+
+            if(firstyear > secondyear || firstyear == secondyear && firstdate > seconddate)
+            {
+                System.out.println("\nYou must enter a later date than the previous date used\n");
+                getDate();
+            }
+            getInterest();
         }
     }
     
