@@ -16,16 +16,17 @@ public class Savings extends Account{
         super(bal, num, name, PIN);
     }
     
+    @Override
     protected void getInterest()
     {
         int datediff = seconddate - firstdate;
-        rate = .90/365;
+        rate = .30/365;
         double ratetime = Math.pow(1+rate, datediff);
                      
         if(secondyear - firstyear > 0) //allows for different years to be input
         {
             int yeardiff = secondyear - firstyear;
-            ratetime *= Math.pow(1.90, yeardiff);
+            ratetime *= Math.pow(1.30, yeardiff);
         }
         balance *= ratetime;
         firstdate = seconddate;
