@@ -74,7 +74,7 @@ public class NamedATM
         {
            System.out.println("\nPlease enter a name to be associated with the type of account you want");
            String name = sc.nextLine();
-           for(int i = 0; i<myAccounts.length;i++)
+           for(int i = 0; i<myAccounts.length; i++)
            {
                if(myAccounts[i] != null && name.equalsIgnoreCase(myAccounts[i].getName()))
                {
@@ -85,20 +85,24 @@ public class NamedATM
            }                  
            System.out.println("\nPlease enter a PIN to use with this account");
            String PIN = sc.nextLine();
-           System.out.println("\nWhat type of account would you like to open, checking or savings?");
-           String type = sc.next();
+           System.out.println("\nWhat type of account would you like to open, checking, savings, or super saver?");
+           String type = sc.nextLine();
 
            if(type.equalsIgnoreCase("checking"))
            {
                myAccounts[index] = new Checking(100, index, name, PIN);
                System.out.println("\nBalances start at $100, and the annual interest rate is 5%");
-
            }   
            else if(type.equalsIgnoreCase("savings"))
            {
                myAccounts[index] = new Savings(100, index, name, PIN);
-               System.out.println("\nBalances start at $100, and the annual interest rate is 90%");
-
+               System.out.println("\nBalances start at $100, and the annual interest rate is 30%");
+           }
+           else if(type.equalsIgnoreCase("super saver"))
+           {
+               myAccounts[index] = new SuperSaver(100, index, name, PIN);
+               System.out.println("\nBalances start at $100, and the annual interest rate is 50%");
+               System.out.println("In a super saver account, you can only make 12 withdrawls a year");
            }
            else
            {
