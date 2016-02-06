@@ -25,7 +25,7 @@ public class NamedATM
     void greeting()
     {       
         Scanner sc= new Scanner(System.in);
-        System.out.println("Welcome, is this your first time using the ATM? (Y/N)");
+        System.out.println("\nWelcome, is this your first time using the ATM? (Y/N)");
         String input = sc.next();
         if(input.equalsIgnoreCase("y"))
         {
@@ -141,7 +141,7 @@ public class NamedATM
         catch(ArrayIndexOutOfBoundsException exc)
         {
              System.out.println("\nInvalid Input");
-             selectAcct();
+             greeting();
         } 
     }   
     
